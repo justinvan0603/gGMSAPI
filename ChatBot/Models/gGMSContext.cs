@@ -32,7 +32,14 @@ namespace ChatBot.Models
         public virtual DbSet<PrdProductMasterNotes> PrdProductMasterNoteses { get; set; }
         public virtual DbSet<PrdProductDtNotes> PrdProductDtNoteses { get; set; }
         public virtual DbSet<PrdCategoryDtNotes> PrdCategoryDtNoteses { get; set; }
-
+        public virtual DbSet<CwWebControl> CwWebControls { get; set; }
+        public virtual DbSet<BotCustomerInfo> BotCustomerInfos { get; set; }
+        public virtual DbSet<BotDomain> BotDomains { get; set; }
+        public virtual DbSet<BotQuestion> BotQuestions { get; set; }
+        public virtual DbSet<BotAnswer> BotAnswers { get; set; }
+        public virtual DbSet<BotQuestionType> BotQuestionTypes { get; set; }
+        public virtual DbSet<BotScenario> BotScenarios { get; set; }
+        public virtual DbSet<PrjInstalledPlugin> PrjInstalledPlugins { get; set; }
         public gGMSContext(DbContextOptions<gGMSContext> options) : base(options)
         {
         }
@@ -47,7 +54,7 @@ namespace ChatBot.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<PrjInstalledPlugin>().HasKey(p => new { p.PLUGIN_ID, p.PROJECT_ID });
             modelBuilder.Entity<CmsContractFileUpload>(en =>
             {
                 en.Property(n => n.FILE_SIZE)

@@ -37,6 +37,7 @@ namespace ChatBot.Models
         public string DATABASE_NAME { get; set; }
         public string DOMAIN { get; set; }
         public string SUB_DOMAIN { get; set; }
+        //public string OPERATION_STATE { get; set; }
 
     }
 }
