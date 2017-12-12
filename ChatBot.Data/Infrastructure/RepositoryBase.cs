@@ -40,6 +40,12 @@ namespace ChatBot.Data.Infrastructure
 
             return _context.Set<T>().AsQueryable();
         }
+        public IQueryable<T> GetAllIQueryable()
+        {
+
+            IQueryable<T> query = _context.Set<T>();
+            return query;
+        }
         protected ChatBotDbContext DbContext => _context;
 
         //public virtual async Task<IEnumerable<T>> GetAllAsync()

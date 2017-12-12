@@ -1,0 +1,287 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>OverviewEcommerce</title>
+    <meta name="google-signin-client_id" content="864154690044-1em0faelivbkeql49r5i39is7fromo8o.apps.googleusercontent.com">
+    <meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics">
+    <base href="/">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+
+    <h1 style="text-align: center">Tracking tình hình hoạt động trang web</h1>
+
+    <style>
+        .th-inner {
+            font-weight: bold
+        }
+    </style>
+
+
+    <!-- The Sign-in button. This will run `queryReports()` on success. -->
+    <p class="g-signin2" data-onsuccess="queryReports"></p>
+    @*<p class="g-signin2"></p>*@
+    <!-- The API response will be printed here. -->
+<textarea cols="80" rows="20" id="query-output" style="display: none"></textarea>
+
+
+    <!-- Load the JavaScript API client and Sign-in library. -->
+    <script src="https://apis.google.com/js/client:platform.js"></script>
+
+    <div class="wrapper">
+        <!-- Bootstrap core CSS -->
+
+        <link href="~/template/css/bootstrap.min.css" rel="stylesheet" />
+
+        <!-- Paper Dashboard core CSS -->
+
+        <link href="~/template/css/paper-dashboard.css" rel="stylesheet" />
+
+        <!-- CSS for Demo Purpose, don't include it in your project -->
+
+        <link href="~/template/css/demo.css" rel="stylesheet" />
+
+        <!-- Fonts and icons -->
+
+        <link href="~/template/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="~/template/css/themify-icons.css" rel="stylesheet" />
+
+        <div class="main-panel ps-container ps-theme-default ps-active-y" style="width: 100%">
+
+            <div class="content">
+                <div class="container-fluid">
+
+
+                    @*<div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card">
+                                <div class="panel-group">
+                                    <div class="panel panel-border panel-default">
+                                        <div class="card-header">
+                                            <a data-toggle="collapse" href="#collapse" id="expand">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <span class="smooth">Thêm mới ... </span><i class="ti-angle-down"></i>
+                                                    </h4>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="card-content">
+                                            <div id="collapse" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    <form id="form" enctype="multipart/form-data" id="form"
+                                                          class="form-horizontal">
+                                                        <input type="text" style="display: none;" name="PROJECT_ID"
+                                                               id="PROJECT_ID">
+
+
+                                                        <input class="form-control" name="PROJECT_ID" id="PROJECT_ID"
+                                                               type="hidden"
+                                                               autocomplete="off" aria-required="true">
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">
+                                                                Name <star>*</star>
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                <input class="form-control" name="PROJECT_NAME" id="PROJECT_NAME"
+                                                                       type="text" required="true"
+                                                                       autocomplete="off" aria-required="true">
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="card-footer text-center">
+                                                            <button type="submit" id="add"
+                                                                    class="btn btn-wd btn-success" name="POST">
+                                                                <span class="btn-label">
+                                                                    <i class="fa fa-check"></i>
+                                                                    <span class="smooth">ADD</span>
+                                                                </span>
+                                                            </button>
+                                                            <button type="button" id="clear"
+                                                                    class="btn btn-wd btn-default">
+                                                                <span class="btn-label">
+                                                                    <i class="fa fa-times"></i>
+                                                                </span> CLEAR
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+
+
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card">
+
+                                <div class="card-content">
+                                    <div class="toolbar"></div>
+                                    <div id="table">
+                                        <table data-toggle="table" class="table" id="bootstrap-table"
+                                               data-url="/api/OverviewEcommerceApi"
+                                               data-search="true" data-show-refresh="true"
+                                               data-show-toggle="true" data-show-columns="true">
+                                            <thead>
+                                            <tr>
+                                                <th data-field="actions" class="td-actions"
+                                                    data-events="operateEvents"
+                                                    data-formatter="operateFormatter">Thao tác</th>
+                                                <th data-field="PROJECT_ID">Mã dự án </th>
+                                                <th data-field="PROJECT_CODE">Mã hợp đồng</th>
+                                                <th data-field="PROJECT_NAME">Tên dự án</th>
+                                                <th data-field="DOMAIN">Tên miền</th>
+                                                  
+                                            </tr>
+                                            </thead>
+                                            
+                                            
+                                        </table>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js -->
+
+        <script src="~/template/js/common/jquery.min.js"></script>
+        <script src="~/template/js/common/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="~/template/js/common/perfect-scrollbar.min.js" type="text/javascript"></script>
+        <script src="~/template/js/common/bootstrap.min.js" type="text/javascript"></script>
+
+        <!-- Forms Validations Plugin -->
+        <script src="~/template/js/common/jquery.validate.min.js"></script>
+
+        <!-- Promise Library for SweetAlert2 working on IE -->
+        <script src="~/template/js/common/es6-promise-auto.min.js"></script>
+
+        <!-- Plugin for Date Time Picker and Full Calendar Plugin-->
+        <script src="~/template/js/common/moment.min.js"></script>
+
+        <!-- Date Time Picker Plugin is included in this js file -->
+        <script src="~/template/js/common/bootstrap-datetimepicker.js"></script>
+
+        <!-- Select Picker Plugin -->
+        <script src="~/template/js/common/bootstrap-selectpicker.js"></script>
+
+        <!-- Switch and Tags Input Plugins -->
+        <script src="~/template/js/common/bootstrap-switch-tags.js"></script>
+
+        <!-- Circle Percentage-chart -->
+        <script src="~/template/js/common/jquery.easypiechart.min.js"></script>
+
+        <!-- Charts Plugin -->
+        <script src="~/template/js/common/chartist.min.js"></script>
+
+        <!-- Notifications Plugin -->
+        <script src="~/template/js/common/bootstrap-notify.js"></script>
+
+        <!-- Sweet Alert 2 plugin -->
+        <script src="~/template/js/common/sweetalert2.js"></script>
+
+        <!-- Vector Map plugin -->
+        <script src="~/template/js/common/jquery-jvectormap.js"></script>
+
+        <!-- Wizard Plugin -->
+        <script src="~/template/js/common/jquery.bootstrap.wizard.min.js"></script>
+
+        <!-- Bootstrap Table Plugin -->
+        <script src="~/template/js/common/bootstrap-table.js"></script>
+
+        <!-- Plugin for DataTables.net -->
+        <script src="~/template/js/common/jquery.datatables.js"></script>
+
+        <!-- Full Calendar Plugin -->
+        <script src="~/template/js/common/fullcalendar.min.js" charset="UTF-8"></script>
+
+        <!-- Paper Dashboard PRO Core javascript and methods for Demo purpose -->
+        <script src="~/template/js/common/paper-dashboard.js"></script>
+
+        <!-- Sharrre Library -->
+        <script src="~/template/js/common/jquery.sharrre.js"></script>
+        
+    <script src="~/template/js/common/table.js"></script>
+    <script src="~/template/js/common/main.js"></script>
+      
+
+    <script>
+        function POST() {
+            var data = $("#form").serializeFormJSON();
+            $.ajax({
+                url: "/api/OverviewEcommerceApi  ",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function () {
+                    Message("Thành công", "Bạn đã thêm dữ liệu thành công!", "success");
+                    $('#bootstrap-table').bootstrapTable('refresh');
+                    ResetInput();
+                },
+                error: function () {
+                    Message("Thất bại", "Đã có lỗi xảy ra!", "danger");
+                }
+            });
+        }
+
+        function PUT() {
+            var data = $("#form").serializeFormJSON();
+            $.ajax({
+                url: "/api/OverviewEcommerceApi",
+                method: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function () {
+                    Message("Thành công", "Bạn đã cập nhật dữ liệu thành công!", "success");
+                    $('#bootstrap-table').bootstrapTable('refresh');
+                    ResetInput();
+                },
+                error: function () {
+                    Message("Thất bại", "Đã có lỗi xảy ra!", "danger");
+                }
+            });
+        }
+
+        window.operateEvents = {
+            'click .edit': function (e, value, row, index) {
+                Update(row);
+            },
+            'click .remove': function (e, value, row, index) {
+                var r = confirm("Bạn chắc chưa????");
+                if (r == true) {
+                    $.ajax({
+                        url: "/api/OverviewEcommerceApi/" + row.Id,
+                        method: "DELETE",
+                        contentType: "application/json",
+                        success: function () {
+                            Message("Thành công", "Bạn đã xóa dữ liệu thành công!", "success");
+                            $('#bootstrap-table').bootstrapTable('refresh');
+                            ResetInput();
+                        },
+                        error: function () {
+                            Message("Thất bại", "Đã có lỗi xảy ra!", "danger");
+                        }
+                    });
+                }
+            }
+        };
+
+
+    </script>
+   
+    </div>
+</body>
+</html>
+
+
+

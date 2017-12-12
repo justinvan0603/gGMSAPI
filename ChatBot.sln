@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatBot.Data", "ChatBot.Data\ChatBot.Data.csproj", "{1B43CD5A-475E-4343-B5BD-CEE55B1AB3A5}"
 EndProject
@@ -12,8 +12,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatBot.Common", "ChatBot.Common\ChatBot.Common.csproj", "{09C12BBE-8917-4081-B870-7127FA3A2C05}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatBot.Model", "ChatBot.Model\ChatBot.Model.csproj", "{B9C9FA3A-AE8A-4A9D-BF21-69409C0E5E17}"
-EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{437B5A1D-E2E6-4B39-B3F7-615D622519D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,12 +39,12 @@ Global
 		{E27ADB10-9711-4556-923C-A20925106842}.Release|x64.Build.0 = Release|Any CPU
 		{9E31327E-76A3-4517-ADB5-79F2A1745C18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9E31327E-76A3-4517-ADB5-79F2A1745C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9E31327E-76A3-4517-ADB5-79F2A1745C18}.Debug|x64.ActiveCfg = Debug|x64
-		{9E31327E-76A3-4517-ADB5-79F2A1745C18}.Debug|x64.Build.0 = Debug|x64
+		{9E31327E-76A3-4517-ADB5-79F2A1745C18}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9E31327E-76A3-4517-ADB5-79F2A1745C18}.Debug|x64.Build.0 = Debug|Any CPU
 		{9E31327E-76A3-4517-ADB5-79F2A1745C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E31327E-76A3-4517-ADB5-79F2A1745C18}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9E31327E-76A3-4517-ADB5-79F2A1745C18}.Release|x64.ActiveCfg = Release|x64
-		{9E31327E-76A3-4517-ADB5-79F2A1745C18}.Release|x64.Build.0 = Release|x64
+		{9E31327E-76A3-4517-ADB5-79F2A1745C18}.Release|x64.ActiveCfg = Release|Any CPU
+		{9E31327E-76A3-4517-ADB5-79F2A1745C18}.Release|x64.Build.0 = Release|Any CPU
 		{09C12BBE-8917-4081-B870-7127FA3A2C05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{09C12BBE-8917-4081-B870-7127FA3A2C05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09C12BBE-8917-4081-B870-7127FA3A2C05}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -63,16 +61,11 @@ Global
 		{B9C9FA3A-AE8A-4A9D-BF21-69409C0E5E17}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B9C9FA3A-AE8A-4A9D-BF21-69409C0E5E17}.Release|x64.ActiveCfg = Release|Any CPU
 		{B9C9FA3A-AE8A-4A9D-BF21-69409C0E5E17}.Release|x64.Build.0 = Release|Any CPU
-		{437B5A1D-E2E6-4B39-B3F7-615D622519D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{437B5A1D-E2E6-4B39-B3F7-615D622519D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{437B5A1D-E2E6-4B39-B3F7-615D622519D3}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{437B5A1D-E2E6-4B39-B3F7-615D622519D3}.Debug|x64.Build.0 = Debug|Any CPU
-		{437B5A1D-E2E6-4B39-B3F7-615D622519D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{437B5A1D-E2E6-4B39-B3F7-615D622519D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{437B5A1D-E2E6-4B39-B3F7-615D622519D3}.Release|x64.ActiveCfg = Release|Any CPU
-		{437B5A1D-E2E6-4B39-B3F7-615D622519D3}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C724079-F15C-4078-ACFD-AABD801FC483}
 	EndGlobalSection
 EndGlobal

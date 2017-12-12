@@ -207,6 +207,140 @@ namespace ChatBot.Data.Migrations
                     b.ToTable("MenuRoles");
                 });
 
+            modelBuilder.Entity("ChatBot.Model.Models.OverviewEcommerce", b =>
+                {
+                    b.Property<int>("OVERVIEW_ECOMMERCE_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("APPROVE_DT");
+
+                    b.Property<string>("AUTH_STATUS");
+
+                    b.Property<string>("CHECKER_ID");
+
+                    b.Property<DateTime?>("CREATE_DT");
+
+                    b.Property<string>("DIMENSIONS");
+
+                    b.Property<string>("DOMAIN");
+
+                    b.Property<string>("EDITOR_ID");
+
+                    b.Property<DateTime?>("EDIT_DT");
+
+                    b.Property<string>("ITEM_REVENUE");
+
+                    b.Property<string>("MAKER_ID");
+
+                    b.Property<string>("PRODUCT_DETAIL_VIEWS");
+
+                    b.Property<string>("PRODUCT_NAME");
+
+                    b.Property<string>("PROJECT_ID");
+
+                    b.Property<string>("QUANTITY_ADDED_TO_CART");
+
+                    b.Property<string>("QUANTITY_CHECKED_OUT");
+
+                    b.Property<string>("RECORD_STATUS");
+
+                    b.Property<string>("VERSION");
+
+                    b.Property<int>("VERSION_INT");
+
+                    b.HasKey("OVERVIEW_ECOMMERCE_ID");
+
+                    b.ToTable("OW_OVERVIEW_ECOMMERCE");
+                });
+
+            modelBuilder.Entity("ChatBot.Model.Models.ProductListPerformanceEcommerce", b =>
+                {
+                    b.Property<int>("PRODUCTLIST_PERFORMANCE_ECOMMERCE_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("APPROVE_DT");
+
+                    b.Property<string>("AUTH_STATUS");
+
+                    b.Property<string>("CHECKER_ID");
+
+                    b.Property<DateTime?>("CREATE_DT");
+
+                    b.Property<string>("DIMENSIONS");
+
+                    b.Property<string>("DOMAIN");
+
+                    b.Property<string>("EDITOR_ID");
+
+                    b.Property<DateTime?>("EDIT_DT");
+
+                    b.Property<string>("ITEM_REVENUE");
+
+                    b.Property<string>("MAKER_ID");
+
+                    b.Property<string>("PRODUCTLIST");
+
+                    b.Property<string>("PRODUCT_DETAIL_VIEWS");
+
+                    b.Property<string>("PROJECT_ID");
+
+                    b.Property<string>("QUANTITY_ADDED_TO_CART");
+
+                    b.Property<string>("QUANTITY_CHECKED_OUT");
+
+                    b.Property<string>("RECORD_STATUS");
+
+                    b.Property<int>("VERSION_INT");
+
+                    b.HasKey("PRODUCTLIST_PERFORMANCE_ECOMMERCE_ID");
+
+                    b.ToTable("OW_PRODUCTLIST_PERFORMANCE_ECOMMERCE");
+                });
+
+            modelBuilder.Entity("ChatBot.Model.Models.ShoppingBehaviorEcommerce", b =>
+                {
+                    b.Property<int>("SHOPPING_BEHAVIOR_ECOMMERCE_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("APPROVE_DT");
+
+                    b.Property<string>("AUTH_STATUS");
+
+                    b.Property<string>("CHECKER_ID");
+
+                    b.Property<DateTime?>("CREATE_DT");
+
+                    b.Property<string>("DIMENSIONS");
+
+                    b.Property<string>("DOMAIN");
+
+                    b.Property<string>("EDITOR_ID");
+
+                    b.Property<DateTime?>("EDIT_DT");
+
+                    b.Property<string>("ITEM_REVENUE");
+
+                    b.Property<string>("MAKER_ID");
+
+                    b.Property<string>("PRODUCT_DETAIL_VIEWS");
+
+                    b.Property<string>("PROJECT_ID");
+
+                    b.Property<string>("QUANTITY_ADDED_TO_CART");
+
+                    b.Property<string>("QUANTITY_CHECKED_OUT");
+
+                    b.Property<string>("RECORD_STATUS");
+
+                    b.Property<string>("USER_TYPE");
+
+                    b.Property<int>("VERSION_INT");
+
+                    b.HasKey("SHOPPING_BEHAVIOR_ECOMMERCE_ID");
+
+                    b.ToTable("OW_SHOPPING_BEHAVIOR_ECOMMERCE");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
                 {
                     b.Property<string>("Id")

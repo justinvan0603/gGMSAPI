@@ -1,0 +1,201 @@
+body {
+	margin-bottom: 30px !important;
+}
+
+div#title{
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+}
+div#title p{
+	background-color: #003366;
+	padding: 10px 0 10px 0;
+	margin-bottom: 5px;
+}
+.center{
+	text-align: center;
+}
+.content-item {
+	width: 100%;
+	height: auto;
+	margin-bottom: 10px;
+	overflow: auto;
+	margin-top: -35px;
+	padding-top: 35px;
+}
+.content-item label{
+	font-weight: 600;
+	width: 35%;
+	text-align: right;
+	padding: 6px 20px 6px 6px;
+}
+
+.content-item input[type = text],
+.content-item #DateTime input[type = number],
+.content-item input[type = email],
+.content-item input[type = file]{
+	width: 40%;
+	text-align: center;
+	padding: 6px;
+}
+
+
+.content-item #DateTime select:focus,
+.content-item input[type = text]:focus,
+.content-item #DateTime input[type = number]:focus,
+.content-item input[type = email]:focus,
+.content-item input[type = file]:focus
+{
+	background-color: rgba(123, 170, 247, 0.35);
+	transition: all .5s;
+}
+
+.content-item #GioiTinh {
+	padding: 6px 6px 6px 0;
+}
+
+.content-item #DateTime {
+	padding: 0;
+}
+
+.content-item #DateTime select {
+	padding: 8px;
+}
+
+.content-item #DateTime select,
+.content-item #DateTime input[type = text],
+.content-item #DateTime input[type = number] {
+	width: 21.5%;
+}
+
+.content-item .panel{
+	width: 46%;
+	height: 170px;
+	border: 0.5px solid gray;
+	border-radius: 3px;
+	overflow-y: scroll;
+}
+
+.content-item ul {
+	list-style-type: none;
+	padding-top: 15px;
+	padding-left: 10px;
+	padding-bottom: 0px;
+	line-height: 20px;
+}
+
+.content-item #button-move{
+	width: 7%;
+}
+
+.content-item #button-move input[type = button]{
+	height: 30px;
+	margin-bottom: 5px;
+	padding: 5px;
+}
+
+.content-item label.col-title.col-md-6 {
+	width: 50%;
+	text-align: center;
+}
+
+.content-item.group-panel{
+	width: 80%;
+	margin-left: 10%;
+	height: auto;
+	margin-bottom: -5px;
+	overflow: auto;
+}
+
+div#control input[type = button],
+div#control input[type = submit] {
+	padding: 5px;
+	width: 115px;
+}
+
+div#control input[type = button],
+div#control input[type = submit] {
+	padding: 5px;
+	width: 115px;
+}
+
+div#table {
+	width: 80%;
+	margin-left: 10%;
+	margin-top: 15px;
+}
+
+div#table table {
+	width: 100%;
+}
+
+div#table tr,
+div#table th,
+div#table td {
+	border: 0.5px solid gray;
+	text-align: center;
+	padding: 6px;
+	vertical-align: middle;
+}
+
+div#table th {
+	background-color: #003366;
+	color: white;
+	font-size: 15px;
+}
+
+div#table tr:hover {
+	background-color: #efefef;
+}
+
+.content-item div#DateTime p#comma {
+	margin-right: -50px;
+	padding: 6px;
+	padding-bottom: 0;
+}
+
+.content-item div#DateTime p#DateTimeDetail,
+.content-item p#EmailDetail {
+	padding-top: 6px;
+}
+
+.content-item div#DateTime p#DateTimeDetail {
+	width: 26%
+}
+
+.selected {
+	background-color:#efefef;
+	margin-right: 10px;
+}
+
+td.avatar {
+    width: 10%;
+}
+
+th.action {
+    width: 1%;
+}
+
+a.edit {
+    padding-right: 5px;
+}
+
+a.remove {
+    padding-left: 5px;
+}
+
+div#message {
+    width: 25%;
+    border: 1px solid rgba(49, 86, 143, 0.76);
+    padding: 45px;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 100;
+    position: fixed;
+    top: 38%;
+    left: 38%;
+    background: rgba(49, 86, 143, 0.76);
+    font-size: 32px;
+    color: white;
+    display: none;
+}

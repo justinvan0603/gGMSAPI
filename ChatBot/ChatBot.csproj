@@ -92,6 +92,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.0.0" />
     <PackageReference Include="MySql.Data" Version="7.0.7-m61" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="runtime.centos.7.1-x64.Microsoft.NETCore.Runtime.CoreCLR" Version="1.0.1-beta-23516" />
     <PackageReference Include="System.ServiceModel.Duplex" Version="4.3.0" />
     <PackageReference Include="System.ServiceModel.Http" Version="4.3.0" />
@@ -122,6 +123,37 @@
     <Folder Include="Container\ContractFilesFromCustomer\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="wwwroot\postDataE\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\template\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\template\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\template\js\common\bootstrap-datetimepicker.js" />
+    <None Include="wwwroot\template\js\common\bootstrap-notify.js" />
+    <None Include="wwwroot\template\js\common\bootstrap-selectpicker.js" />
+    <None Include="wwwroot\template\js\common\bootstrap-switch-tags.js" />
+    <None Include="wwwroot\template\js\common\bootstrap-table.js" />
+    <None Include="wwwroot\template\js\common\bootstrap.min.js" />
+    <None Include="wwwroot\template\js\common\chartist.min.js" />
+    <None Include="wwwroot\template\js\common\common.js" />
+    <None Include="wwwroot\template\js\common\demo.js" />
+    <None Include="wwwroot\template\js\common\es6-promise-auto.min.js" />
+    <None Include="wwwroot\template\js\common\fullcalendar.min.js" />
+    <None Include="wwwroot\template\js\common\jquery-jvectormap.js" />
+    <None Include="wwwroot\template\js\common\jquery-ui.min.js" />
+    <None Include="wwwroot\template\js\common\jquery.bootstrap.wizard.min.js" />
+    <None Include="wwwroot\template\js\common\jquery.datatables.js" />
+    <None Include="wwwroot\template\js\common\jquery.easypiechart.min.js" />
+    <None Include="wwwroot\template\js\common\jquery.min.js" />
+    <None Include="wwwroot\template\js\common\jquery.sharrre.js" />
+    <None Include="wwwroot\template\js\common\jquery.validate.min.js" />
+    <None Include="wwwroot\template\js\common\main.js" />
+    <None Include="wwwroot\template\js\common\moment.min.js" />
+    <None Include="wwwroot\template\js\common\paper-dashboard.js" />
+    <None Include="wwwroot\template\js\common\perfect-scrollbar.min.js" />
+    <None Include="wwwroot\template\js\common\sweetalert2.js" />
+    <None Include="wwwroot\template\js\common\table.js" />
   </ItemGroup>
 
 </Project>

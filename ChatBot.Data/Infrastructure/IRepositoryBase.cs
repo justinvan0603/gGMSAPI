@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using ChatBot.Model.Abstract;
@@ -16,6 +17,8 @@ namespace ChatBot.Data.Infrastructure
         //   Task<IEnumerable<T>> GetAllAsync();
 
         IEnumerable<T> GetAll(string[] includes = null);
+
+        IQueryable<T> GetAllIQueryable();
         T GetSingle(int id);
         T GetSingle(Expression<Func<T, bool>> predicate);
         T GetSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
