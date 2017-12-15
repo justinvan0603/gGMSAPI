@@ -55,7 +55,7 @@ namespace ChatBot.Service
         {
             var version = GetVersionFinal(id);
             var result = _botDomainRepository.GetAllIQueryable().Where(x =>
-                x.RECORD_STATUS == "1" && x.PROJECT_ID == id && x.VERSION_INT == version);
+                x.RECORD_STATUS == "1" && x.PROJECT_ID == id && x.VERSION_INT == version).OrderByDescending(x => x.ITEM_REVENUE);
             if (!String.IsNullOrWhiteSpace(keyword)&& keyword!="undefined")
                 return result.Where(y=>y.PRODUCT_NAME.Contains(keyword));
             return result;

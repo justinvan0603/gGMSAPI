@@ -131,7 +131,7 @@ function Update(data) {
                 reportRequests: [
                     {
                         viewId: VIEW_ID,
-                        "filtersExpression": "ga:itemRevenue!=0",
+                    
                         dateRanges: [
                             {
                                 startDate: '30daysAgo',
@@ -164,6 +164,51 @@ function Update(data) {
                 ]
             }
         }).then(displayResults2, console.error.bind(console));
+
+
+        gapi.client.request({
+            path: '/v4/reports:batchGet',
+            apiKey: 'AIzaSyDUiJxZuSngmxzC-TXOLe-BmnoB31syQOc',
+            root: 'https://analyticsreporting.googleapis.com/',
+            method: 'POST',
+            body: {
+                //apiKey:'AIzaSyDUiJxZuSngmxzC-TXOLe-BmnoB31syQOc',
+                reportRequests: [
+                    {
+                        viewId: VIEW_ID,
+                      
+                        dateRanges: [
+                            {
+                                startDate: '30daysAgo',
+                                endDate: 'today'
+                            }
+                        ],
+                        metrics: [
+                            {
+                                "expression": "ga:pageviews"
+                            },
+                            {
+                                "expression": "ga:pageValue"
+                            },
+                            {
+                                "expression": "ga:timeOnPage"
+                            },
+                            {
+                                "expression": "ga:exitRate"
+                            }
+                            // expression: 'ga:sessions'
+
+
+                        ],
+                        "dimensions": [
+                            {
+                                "name": "ga:pagePath"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }).then(displayResults3, console.error.bind(console));
     }
 
     // Query the API and print the results to the page.
@@ -221,7 +266,7 @@ function displayResults(response) {
         },
         error: function () {
          //   console.log("error");
-            Message("Thất bại", "Đã có lỗi xảy ra!", "danger");
+            Message("Thất bại", "Đã có lỗi xảy ra khi cập nhật dữ liệu Tổng quan thương mại điện tử!", "danger");
         }
     });
 }
@@ -232,7 +277,7 @@ function displayResults2(response) {
     var data = { 'formattedJson': response.result, 'project': _data };
     var data_new = JSON.stringify(data, null, 2);
 
-  //  console.log("data" + JSON.stringify(data, null, 2));
+    console.log("data" + JSON.stringify(data, null, 2));
     $.ajax({
         url: "/api/ProductListPerformanceEcommerceApi/PostProductListPerformanceEcommerce",
         method: "POST",
@@ -251,7 +296,36 @@ function displayResults2(response) {
         },
         error: function () {
           //  console.log("error");
-            Message("Thất bại", "Đã có lỗi xảy ra!", "danger");
+            Message("Thất bại", "Đã có lỗi xảy ra khi cập nhật dữ liệu Hiệu suất doanh sách sản phẩm!", "danger");
+        }
+    });
+}
+
+function displayResults3(response) {
+
+    var data = { 'formattedJson': response.result, 'project': _data };
+    var data_new = JSON.stringify(data, null, 2);
+
+      console.log("data" + JSON.stringify(data, null, 2));
+    $.ajax({
+        url: "/api/PageBehaviorEcommerceApi/PostPageBehaviorEcommerce",
+        method: "POST",
+        contentType: "application/json",
+        data: data_new,
+        //   data: data,
+        success: function (data) {
+            //console.log(data);
+            if (data.Succeeded)
+                Message("Thành công", "Bạn đã cập nhật dữ liệu Hiệu suất sản phẩm theo trang thành công!", "success");
+            else
+                Message("Thất bại", "Đã có lỗi xảy ra!", "danger");
+
+            //   $('#bootstrap-table').bootstrapTable('refresh');
+            //  ResetInput();
+        },
+        error: function () {
+            //  console.log("error");
+            Message("Thất bại", "Đã có lỗi xảy ra khi cập nhật dữ liệu Hiệu suất sản phẩm theo trang!", "danger");
         }
     });
 }

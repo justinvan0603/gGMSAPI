@@ -253,6 +253,50 @@ namespace ChatBot.Data.Migrations
                     b.ToTable("OW_OVERVIEW_ECOMMERCE");
                 });
 
+            modelBuilder.Entity("ChatBot.Model.Models.PageBehaviorEcommerce", b =>
+                {
+                    b.Property<int>("PAGE_BEHAVIOR_ECOMMERCE_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("APPROVE_DT");
+
+                    b.Property<string>("AUTH_STATUS");
+
+                    b.Property<string>("CHECKER_ID");
+
+                    b.Property<DateTime?>("CREATE_DT");
+
+                    b.Property<string>("DIMENSIONS");
+
+                    b.Property<string>("DOMAIN");
+
+                    b.Property<string>("EDITOR_ID");
+
+                    b.Property<DateTime?>("EDIT_DT");
+
+                    b.Property<string>("EXIT_RATE");
+
+                    b.Property<string>("MAKER_ID");
+
+                    b.Property<string>("PAGE_PATH");
+
+                    b.Property<string>("PAGE_VALUE");
+
+                    b.Property<string>("PAGE_VIEW");
+
+                    b.Property<string>("PROJECT_ID");
+
+                    b.Property<string>("RECORD_STATUS");
+
+                    b.Property<string>("TIME_ON_PAGE");
+
+                    b.Property<int>("VERSION_INT");
+
+                    b.HasKey("PAGE_BEHAVIOR_ECOMMERCE_ID");
+
+                    b.ToTable("OW_PAGE_BEHAVIOR_ECOMMERCE");
+                });
+
             modelBuilder.Entity("ChatBot.Model.Models.ProductListPerformanceEcommerce", b =>
                 {
                     b.Property<int>("PRODUCTLIST_PERFORMANCE_ECOMMERCE_ID")

@@ -126,6 +126,7 @@ namespace ChatBot
 
             services.AddScoped<IOverviewEcommerceRepository, OverviewEcommerceRepository>();
             services.AddScoped<IProductListPerformanceEcommerceRepository, ProductListPerformanceEcommerceRepository>();
+            services.AddScoped<IPageBehaviorEcommerceRepository, PageBehaviorEcommerceRepository>();
             //Services
 
             services.AddScoped<IMenuRoleService, MenuRoleService>();
@@ -134,6 +135,7 @@ namespace ChatBot
 
             services.AddScoped<IOverviewEcommerceService, OverviewEcommerceService>();
             services.AddScoped<IProductListPerformanceEcommerceService, ProductListPerformanceEcommerceService>();
+            services.AddScoped<IPageBehaviorEcommerceService, PageBehaviorEcommerceService>();
             //   services.AddAuthentication();
             //    services.AddCors();
             services.AddCors(options =>

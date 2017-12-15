@@ -25,6 +25,8 @@ namespace ChatBot.Data
         public DbSet<ShoppingBehaviorEcommerce> ShoppingBehaviorEcommerces { set; get; }
 
         public DbSet<ProductListPerformanceEcommerce> ProductListPerformanceEcommerces { set; get; }
+
+        public DbSet<PageBehaviorEcommerce> PageBehaviorEcommerces { set; get; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

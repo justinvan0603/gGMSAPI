@@ -143,7 +143,7 @@ namespace ChatBot.Controllers
                     var productName = rows[i].Dimensions[0];
                     var values = rows[i].Metrics[0].Values;
 
-                    decimal moeny = Decimal.Parse(values[0], System.Globalization.NumberStyles.Any);
+                //    decimal moeny = Decimal.Parse(values[0], System.Globalization.NumberStyles.Any);
                   //  var moeny= Double.Parse(values[0], System.Globalization.NumberStyles.Float);
 
                     //string[] moeny = values[0].ToString().Split('E');
@@ -152,10 +152,11 @@ namespace ChatBot.Controllers
                     {
                         OVERVIEW_ECOMMERCE_ID = 0,
                         PRODUCT_NAME = productName,
-                        ITEM_REVENUE = moeny.ToString(),
+                    //    ITEM_REVENUE = moeny.ToString(),
+                        ITEM_REVENUE = values[0],
                         PRODUCT_DETAIL_VIEWS = values[1],
-                        QUANTITY_ADDED_TO_CART = values[2],
-                        QUANTITY_CHECKED_OUT = values[3],
+                        QUANTITY_CHECKED_OUT = values[2],
+                        QUANTITY_ADDED_TO_CART = values[3],
                         CREATE_DT = DateTime.Now,
                         RECORD_STATUS = "1",
                         VERSION_INT = version+1,
