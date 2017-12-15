@@ -69,7 +69,7 @@ function Update(data) {
     //console.log("Update");
     //console.log(data.NOTES);
     
-    var VIEW_ID = data.NOTES;
+    var VIEW_ID = data.VIEW_ID;
 
   //  var VIEW_ID = '163577832';
 
