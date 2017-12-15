@@ -159,7 +159,7 @@ namespace ChatBot.Controllers
                         CREATE_DT = DateTime.Now,
                         RECORD_STATUS = "1",
                         VERSION_INT = version + 1,
-                        DOMAIN = project["SUB_DOMAIN"] + "." + project["DOMAIN"],
+                        DOMAIN =  project["DOMAIN"],
                  //       VERSION = (version + 1).ToString(),
 
                         PROJECT_ID = project["PROJECT_ID"]

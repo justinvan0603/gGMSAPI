@@ -163,7 +163,7 @@ namespace ChatBot.Controllers
                         VERSION = (version + 1).ToString(),
                         
                         PROJECT_ID = project["PROJECT_ID"],
-                        DOMAIN = project["SUB_DOMAIN"] + "."+project["DOMAIN"]
+                        DOMAIN = project["DOMAIN"]
                     };
                     _overviewEcommerceService.Add(newOverviewEcommerce);
                     _overviewEcommerceService.Save();

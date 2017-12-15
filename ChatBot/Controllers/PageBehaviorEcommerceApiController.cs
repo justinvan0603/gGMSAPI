@@ -140,7 +140,7 @@ namespace ChatBot.Controllers
                     var productName = rows[i].Dimensions[0];
                     var values = rows[i].Metrics[0].Values;
 
-                    decimal money = Decimal.Parse(values[1]);
+                 //   decimal money = Decimal.Parse(values[1]);
                     //  var moeny= Double.Parse(values[0], System.Globalization.NumberStyles.Float);
 
                     //string[] moeny = values[0].ToString().Split('E');
@@ -159,7 +159,7 @@ namespace ChatBot.Controllers
                         CREATE_DT = DateTime.Now,
                         RECORD_STATUS = "1",
                         VERSION_INT = version + 1,
-                        DOMAIN = project["SUB_DOMAIN"] + "." + project["DOMAIN"],
+                        DOMAIN =project["DOMAIN"],
                  //       VERSION = (version + 1).ToString(),
 
                         PROJECT_ID = project["PROJECT_ID"]
