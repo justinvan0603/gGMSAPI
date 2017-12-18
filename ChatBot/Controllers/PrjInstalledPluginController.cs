@@ -32,22 +32,24 @@ namespace ChatBot.Controllers
             var listPrjInstalledPluginResult = await _context.PrjInstalledPlugins.FromSql(prjInstalledPluginCommand).ToListAsync();
             string listProjectCommand = $"dbo.PRJ_PROJECT_MASTER_Search @p_TOP = ''";
             var listProjectResult = await _context.PrjProjectMaster.FromSql(listProjectCommand).ToListAsync();
-            listProjectResult = listProjectResult.Where(prj => !listPrjInstalledPluginResult.Any(ip => ip.PROJECT_ID.Equals(prj.PROJECT_ID))).ToList();
+            
             List<PrjInstalledPluginViewModel> listPrjInstalledPluginViewModel = new List<PrjInstalledPluginViewModel>();
             foreach (var item in listPrjInstalledPluginResult)
             {
                 PrjInstalledPluginViewModel newObj = new PrjInstalledPluginViewModel();
+                newObj.PrjProjectMaster = listProjectResult.Single(prj => prj.PROJECT_ID.Equals(item.PROJECT_ID));
                 newObj.PrdPlugin = selectedPlugin;
                 newObj.PrjInstalledPlugin = item;
                 newObj.IsChecked = true;
                 listPrjInstalledPluginViewModel.Add(newObj);
             }
-
+            listProjectResult = listProjectResult.Where(prj => !listPrjInstalledPluginResult.Any(ip => ip.PROJECT_ID.Equals(prj.PROJECT_ID))).ToList();
             foreach (var item in listProjectResult)
             {
                 PrjInstalledPluginViewModel newObj = new PrjInstalledPluginViewModel();
                 newObj.PrdPlugin = selectedPlugin;
                 newObj.PrjInstalledPlugin = new PrjInstalledPlugin();
+                newObj.PrjProjectMaster = item;
                 newObj.PrjInstalledPlugin.PLUGIN_ID = pluginid;
                 newObj.PrjInstalledPlugin.IS_CHECKED = "0";
                 newObj.IsChecked = false;

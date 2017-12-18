@@ -9,6 +9,7 @@ namespace ChatBot.ViewModels
     {
         public PrdPlugin PrdPlugin { get; set; }
         public PrjInstalledPlugin PrjInstalledPlugin { get; set; }
+        public PrjProjectMaster PrjProjectMaster { get; set; }
         public bool IsChecked { get; set; }
     }
 }
