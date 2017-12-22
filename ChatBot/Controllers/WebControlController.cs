@@ -57,9 +57,11 @@ namespace ChatBot.Controllers
                 newItem.PrjProjectMaster = item;
                 newItem.CwWebControl = webControlResult.SingleOrDefault(wc => wc.PROJECT_ID.Equals(item.PROJECT_ID));
                 if (newItem.CwWebControl == null)
+                {
                     newItem.CwWebControl = new CwWebControl();
-                newItem.CwWebControl.OPERATION_STATE = "1";
-                newItem.CwWebControl.OPERATION_NAME = "Đang hoạt động";
+                    newItem.CwWebControl.OPERATION_STATE = "1";
+                    newItem.CwWebControl.OPERATION_NAME = "Đang hoạt động";
+                }
                 listWebControlViewModel.Add(newItem);
             }
 
