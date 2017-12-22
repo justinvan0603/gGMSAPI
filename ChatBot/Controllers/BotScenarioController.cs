@@ -116,10 +116,14 @@ namespace ChatBot.Controllers
                 {
                     botScenarioViewModel.BotQuestions[i].SCENARIO_ID = botScenarioViewModel.BotScenario.SCENARIO_ID;
                     botScenarioViewModel.BotQuestions[i].LEVEL = 1;
+                    botScenarioViewModel.BotQuestions[i].IS_END = false;
+                    botScenarioViewModel.BotQuestions[i].RECORD_STATUS = 1;
                     this._context.BotQuestions.Add(botScenarioViewModel.BotQuestions[i]);
                     this._context.SaveChanges();
                     botScenarioViewModel.BotAnswers[i].QUESTION_ID = botScenarioViewModel.BotQuestions[i].QUESTION_ID;
                     botScenarioViewModel.BotAnswers[i].LEVEL = 1;
+                    botScenarioViewModel.BotAnswers[i].IS_END = true;
+                    botScenarioViewModel.BotAnswers[i].RECORD_STATUS = 1;
                     this._context.BotAnswers.Add(botScenarioViewModel.BotAnswers[i]);
                     this._context.SaveChanges();
                 }
@@ -196,7 +200,7 @@ namespace ChatBot.Controllers
             {
 
 
-                string command = $"dbo.BOT_SCENARIO_Active @p_SCENARIO_ID = {id}";
+                string command = $"dbo.BOT_SCENARIO_Activate @p_SCENARIO_ID = {id}";
                 var result = await _context.Database.ExecuteSqlCommandAsync(command, cancellationToken: CancellationToken.None);
                 rs.Succeeded = true;
                 rs.Message = "Thay đổi trạng thái kịch bản thành công";
