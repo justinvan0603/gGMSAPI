@@ -141,7 +141,7 @@ namespace ChatBot.Controllers
             try
             {
 
-                string command = $"dbo.CMS_CUSTOMER_MASTER_Ins @p_CUSTOMER_CODE='{customer.CustomerCode}',@p_CUSTOMER_NAME='{customer.CustomerName}',@p_COMPANY_NAME='{customer.CompanyName}',@p_ADDRESS='{customer.Address}',@p_TAX_CODE='{customer.TaxCode}',@p_Email='{customer.Email}',@p_PhoneNumber='{customer.PhoneNumber}',@p_RECORD_STATUS='1',@p_AUTH_STATUS='U',@p_MAKER_ID='{customer.MakerId}',@p_CREATE_DT='{DateTime.Now.Date}'";
+                string command = $"dbo.CMS_CUSTOMER_MASTER_Ins @p_CUSTOMER_CODE='{customer.CustomerCode}',@p_CUSTOMER_NAME=N'{customer.CustomerName}',@p_COMPANY_NAME=N'{customer.CompanyName}',@p_ADDRESS=N'{customer.Address}',@p_TAX_CODE='{customer.TaxCode}',@p_Email='{customer.Email}',@p_PhoneNumber='{customer.PhoneNumber}',@p_RECORD_STATUS='1',@p_AUTH_STATUS='U',@p_MAKER_ID='{customer.MakerId}',@p_CREATE_DT='{DateTime.Now.Date}'";
                 var result = await _context.Database.ExecuteSqlCommandAsync(command, cancellationToken: CancellationToken.None);
                 //return result;
                 if (result != -1)
@@ -177,7 +177,7 @@ namespace ChatBot.Controllers
             try
             {
 
-                string command = $"dbo.CMS_CUSTOMER_MASTER_Upd @p_CUSTOMER_CODE='{customer.CustomerCode}',@p_CUSTOMER_NAME='{customer.CustomerName}',@p_COMPANY_NAME='{customer.CompanyName}',@p_ADDRESS='{customer.Address}',@p_TAX_CODE='{customer.TaxCode}',@p_Email='{customer.Email}',@p_PhoneNumber='{customer.PhoneNumber}',@p_RECORD_STATUS='1',@p_AUTH_STATUS='U',@p_MAKER_ID='{customer.MakerId}',@p_CREATE_DT='{customer.CreateDt}',@p_EDITOR_ID='{customer.EditorId}',@p_EDIT_DT='{DateTime.Now.Date}'";
+                string command = $"dbo.CMS_CUSTOMER_MASTER_Upd @p_CUSTOMER_CODE='{customer.CustomerCode}',@p_CUSTOMER_NAME=N'{customer.CustomerName}',@p_COMPANY_NAME=N'{customer.CompanyName}',@p_ADDRESS=N'{customer.Address}',@p_TAX_CODE='{customer.TaxCode}',@p_Email='{customer.Email}',@p_PhoneNumber='{customer.PhoneNumber}',@p_RECORD_STATUS='1',@p_AUTH_STATUS='U',@p_MAKER_ID='{customer.MakerId}',@p_CREATE_DT='{customer.CreateDt}',@p_EDITOR_ID='{customer.EditorId}',@p_EDIT_DT='{DateTime.Now.Date}'";
                 var result = await _context.Database.ExecuteSqlCommandAsync(command, cancellationToken: CancellationToken.None);
                 if (result > 0)
                 {
