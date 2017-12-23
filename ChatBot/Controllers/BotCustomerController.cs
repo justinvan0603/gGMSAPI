@@ -20,15 +20,15 @@ namespace ChatBot.Controllers
         {
             this._context = context;
         }
-        [HttpGet("{page:int=0}/{pageSize=12}/{searchstring=}")]
+        [HttpGet("{page:int=0}/{pageSize=12}/{username=}/{searchstring=}")]
         //[Authorize(Roles = "GetPluginBySearchAndPaging")]
-        public async Task<IActionResult> Get(int? page, int? pageSize, string searchstring = null)
+        public async Task<IActionResult> Get(int? page, int? pageSize, string username, string searchstring = null)
         {
 
             PaginationSet<BotCustomerInfo> pagedSet = new PaginationSet<BotCustomerInfo>();
 
             var result =
-                 _context.BotCustomerInfos.FromSql("dbo.BOT_CUSTOMERINFO_Search @p_TOP=''");
+                 _context.BotCustomerInfos.FromSql($"dbo.BOT_CUSTOMERINFO_Search @p_TOP='', @p_USER_NAME ='{username}'");
 
             int currentPage = page.Value;
             int currentPageSize = pageSize.Value;

@@ -21,15 +21,15 @@ namespace ChatBot.Controllers
         {
             this._context = context;
         }
-        [HttpGet("{page:int=0}/{pageSize=12}/{searchstring=}")]
+        [HttpGet("{page:int=0}/{pageSize=12}/{username=}/{searchstring=}")]
         //[Authorize(Roles = "GetPluginBySearchAndPaging")]
-        public  IActionResult Get(int? page, int? pageSize, string searchstring = null)
+        public  IActionResult Get(int? page, int? pageSize,string username, string searchstring = null)
         {
 
             PaginationSet<BotScenario> pagedSet = new PaginationSet<BotScenario>();
 
             var result =
-                 _context.BotScenarios.FromSql("dbo.BOT_SCENARIO_Search @p_TOP=''");
+                 _context.BotScenarios.FromSql($"dbo.BOT_SCENARIO_Search @p_TOP='', @p_USER_NAME = '{username}'");
 
             int currentPage = page.Value;
             int currentPageSize = pageSize.Value;
@@ -109,6 +109,7 @@ namespace ChatBot.Controllers
             GenericResult rs = new GenericResult();
             try
             {
+                botScenarioViewModel.BotScenario.RECORD_STATUS = 1;
                 this._context.BotScenarios.Add(botScenarioViewModel.BotScenario);
                 this._context.SaveChanges();
                 int countQuestion = botScenarioViewModel.BotQuestions.Count;
