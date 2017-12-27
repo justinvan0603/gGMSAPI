@@ -121,12 +121,16 @@ namespace ChatBot.Controllers
                     botScenarioViewModel.BotQuestions[i].RECORD_STATUS = 1;
                     this._context.BotQuestions.Add(botScenarioViewModel.BotQuestions[i]);
                     this._context.SaveChanges();
-                    botScenarioViewModel.BotAnswers[i].QUESTION_ID = botScenarioViewModel.BotQuestions[i].QUESTION_ID;
-                    botScenarioViewModel.BotAnswers[i].LEVEL = 1;
-                    botScenarioViewModel.BotAnswers[i].IS_END = true;
-                    botScenarioViewModel.BotAnswers[i].RECORD_STATUS = 1;
-                    this._context.BotAnswers.Add(botScenarioViewModel.BotAnswers[i]);
-                    this._context.SaveChanges();
+                    //if (botScenarioViewModel.BotQuestions[i].QUESTION_TYPE != 1)
+                    //{
+                        botScenarioViewModel.BotAnswers[i].QUESTION_ID = botScenarioViewModel.BotQuestions[i].QUESTION_ID;
+                        botScenarioViewModel.BotAnswers[i].LEVEL = 1;
+                        botScenarioViewModel.BotAnswers[i].IS_END = true;
+                        botScenarioViewModel.BotAnswers[i].RECORD_STATUS = 1;
+                        this._context.BotAnswers.Add(botScenarioViewModel.BotAnswers[i]);
+                        this._context.SaveChanges();
+                    //}
+                    
                 }
                 
                 rs.Succeeded = true;
@@ -164,14 +168,19 @@ namespace ChatBot.Controllers
                 int countQuestion = botScenarioViewModel.BotQuestions.Count;
                 for (int i = 0; i < countQuestion; i++)
                 {
+                    botScenarioViewModel.BotQuestions[i].QUESTION_ID = 0;
                     botScenarioViewModel.BotQuestions[i].SCENARIO_ID = botScenarioViewModel.BotScenario.SCENARIO_ID;
                     botScenarioViewModel.BotQuestions[i].LEVEL = 1;
                     this._context.BotQuestions.Add(botScenarioViewModel.BotQuestions[i]);
                     this._context.SaveChanges();
-                    botScenarioViewModel.BotAnswers[i].QUESTION_ID = botScenarioViewModel.BotQuestions[i].QUESTION_ID;
-                    botScenarioViewModel.BotAnswers[i].LEVEL = 1;
-                    this._context.BotAnswers.Add(botScenarioViewModel.BotAnswers[i]);
-                    this._context.SaveChanges();
+                    //if (botScenarioViewModel.BotQuestions[i].QUESTION_TYPE != 1)
+                    //{
+                        botScenarioViewModel.BotAnswers[i].ANSWER_ID = 0;
+                        botScenarioViewModel.BotAnswers[i].QUESTION_ID = botScenarioViewModel.BotQuestions[i].QUESTION_ID;
+                        botScenarioViewModel.BotAnswers[i].LEVEL = 1;
+                        this._context.BotAnswers.Add(botScenarioViewModel.BotAnswers[i]);
+                        this._context.SaveChanges();
+                    //}
                 }
                 
                 rs.Succeeded = true;
