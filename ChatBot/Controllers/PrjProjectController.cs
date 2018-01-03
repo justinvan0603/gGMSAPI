@@ -231,7 +231,37 @@ namespace ChatBot.Controllers
 
             PrjProjectMaster pro = prjVM.Project;
             IEnumerable<PrjProjectDT> proDts = prjVM.ProjectDT;
+            string cmd = $"dbo.PRJ_PROJECT_MASTER_Lst";
 
+            var listResult = await _context.PrjProjectMaster.FromSql(cmd).ToListAsync();
+            if(listResult != null)
+            {
+                if(listResult.Any(prj => prj.MYSQL_USERNAME.Equals(pro.MYSQL_USERNAME)))
+                {
+                    rs.Message = "Username CSDL đã tồn tại!";
+                    rs.Succeeded = false;
+                    ObjectResult objRes = new ObjectResult(rs);
+                    
+                    return objRes;
+                }
+                if(listResult.Any(prj => prj.DATABASE_NAME.Equals(pro.DATABASE_NAME)))
+                {
+                    rs.Message = "Tên CSDL cần tạo đã tồn tại!";
+                    rs.Succeeded = false;
+                    ObjectResult objRes = new ObjectResult(rs);
+                    
+                    return objRes;
+                }
+                if(listResult.Any(prj => prj.SUB_DOMAIN.Equals(pro.SUB_DOMAIN)))
+                {
+                    rs.Message = "Subdomain đã tồn tại!";
+                    rs.Succeeded = false;
+                    ObjectResult objRes = new ObjectResult(rs);
+                    
+                    return objRes;
+                }
+
+            }
             //DEFACEWEBSITEContext context = new DEFACEWEBSITEContext();
             try
             {
