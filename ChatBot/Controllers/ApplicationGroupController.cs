@@ -197,7 +197,7 @@ namespace ChatBot.Controllers
                 addResult = new GenericResult()
                 {
                     Succeeded = true,
-                    Message = "Thêm group thành công"
+                    Message = "Thêm nhóm người dùng thành công"
                 };
             }
             catch (Exception ex)
@@ -283,7 +283,7 @@ namespace ChatBot.Controllers
                 genericResult = new GenericResult()
                 {
                     Succeeded = true,
-                    Message = "Thêm group thành công"
+                    Message = "Cập nhật nhóm người dùng thành công"
                 };
 
 
@@ -293,7 +293,7 @@ namespace ChatBot.Controllers
                 genericResult = new GenericResult()
                 {
                     Succeeded = false,
-                    Message = "Thêm group thất bại"
+                    Message = "Cập nhật nhóm người dùng thất bại" + ex.Message
                 };
                 _loggingRepository.Add(new Error() { Message = ex.Message, StackTrace = ex.StackTrace, DateCreated = DateTime.Now });
                 _loggingRepository.Commit();
