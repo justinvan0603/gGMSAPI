@@ -68,6 +68,16 @@ namespace ChatBot.Controllers
              //   var user23 = _userManager.FindByNameAsync(model.Username).Result.Claims;
 
                 var user = await _userManager.FindByNameAsync(model.Username);
+                if (user.LockoutEnabled == false)
+                {
+                    _authenticationResult = new GenericTokenResult()
+                    {
+                        Succeeded = false,
+                        Message = "Tài khoản của bạn đã bị khóa",
+                        access_token = null,
+                        expires_in = 0
+                    };
+                }
                 var result = await _userManager.CheckPasswordAsync(user, model.Password);
 
                 if (result)
