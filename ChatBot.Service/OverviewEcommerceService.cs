@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ChatBot.Common;
 using ChatBot.Data.Respositories;
 using ChatBot.Model.Models;
 
@@ -14,7 +15,10 @@ namespace ChatBot.Service
         IEnumerable<OverviewEcommerce> GetAll(string keyword);
         OverviewEcommerce GetById(int id);
 
+
         IQueryable<OverviewEcommerce> GetOverviewEcommerceByProjectId(string id, string keyword);
+
+       
 
         void Add(OverviewEcommerce botDomain);
 
@@ -25,6 +29,10 @@ namespace ChatBot.Service
         void Save();
 
         int GetVersionFinal(string projectId);
+
+        void RemoveVersionOld(string projectId);
+
+        StatisticsOverviewEcommerceViewModel CountViewOverviewEcommerce(string keyword);
     }
     public class OverviewEcommerceService : IOverviewEcommerceService
     {
@@ -53,14 +61,44 @@ namespace ChatBot.Service
 
         public IQueryable<OverviewEcommerce> GetOverviewEcommerceByProjectId(string id, string keyword)
         {
-            var version = GetVersionFinal(id);
+          //  var version = GetVersionFinal(id);
             var result = _botDomainRepository.GetAllIQueryable().Where(x =>
-                x.RECORD_STATUS == "1" && x.PROJECT_ID == id && x.VERSION_INT == version).OrderByDescending(x => x.ITEM_REVENUE);
+                x.RECORD_STATUS == "1" && x.PROJECT_ID == id).OrderByDescending(x => x.TRANSACTIONREVENUE);
             if (!String.IsNullOrWhiteSpace(keyword)&& keyword!="undefined")
-                return result.Where(y=>y.PRODUCT_NAME.Contains(keyword));
+                return result.Where(y=>y.DOMAIN.Contains(keyword));
             return result;
         }
+        public StatisticsOverviewEcommerceViewModel CountViewOverviewEcommerce(string keyword)
+        {
+            var result = _botDomainRepository.GetAllIQueryable().Where(x =>
+                x.RECORD_STATUS == "1").ToList();
 
+            StatisticsOverviewEcommerceViewModel statisticsViewModel = new StatisticsOverviewEcommerceViewModel();
+            double sum = 0;
+            double productdetailviews=0;
+            double timeonpage = 0;
+            foreach (var item in result)
+            {
+                statisticsViewModel.SESSIONS += Double.Parse(item.SESSIONS);
+                statisticsViewModel.PAGEVIEWS += Double.Parse(item.PAGEVIEWS);
+                timeonpage += Double.Parse(item.TIMEONPAGE);
+                productdetailviews += Double.Parse(item.TRANSACTIONREVENUE);
+
+                statisticsViewModel.PRODUCTDETAILVIEWS += Double.Parse(item.PRODUCTDETAILVIEWS);
+                statisticsViewModel.PRODUCTADDSTOCART += Double.Parse(item.PRODUCTADDSTOCART);
+                statisticsViewModel.PRODUCTCHECKOUTS += Double.Parse(item.PRODUCTCHECKOUTS);
+
+                statisticsViewModel.USERS += Double.Parse(item.USERS);
+                statisticsViewModel.NEWS_USERS += Double.Parse(item.NEWS_USERS);
+            }
+            statisticsViewModel.TRANSACTIONREVENUE =
+                (productdetailviews / 10).ToString("#,##");
+            statisticsViewModel.TIMEONPAGE =
+                (timeonpage / (10)).ToString("#,##");
+
+            return statisticsViewModel;
+           // return null;
+        }
 
         public void Add(OverviewEcommerce botDomain)
         {
@@ -86,9 +124,14 @@ namespace ChatBot.Service
         public IEnumerable<OverviewEcommerce> GetAll(string keyword)
         {
             if (!string.IsNullOrEmpty(keyword))
-                return _botDomainRepository.GetMulti(x => x.PRODUCT_NAME.Contains(keyword));
+                return _botDomainRepository.GetMulti(x => x.DOMAIN.Contains(keyword));
             else
                 return _botDomainRepository.GetAll();
+        }
+
+        public void RemoveVersionOld(string projectId)
+        {
+            _botDomainRepository.RemoveVersionOld(projectId);
         }
     }
 }
