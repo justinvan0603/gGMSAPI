@@ -103,6 +103,19 @@ namespace ChatBot.Controllers
 
             var PageBehaviorEcommerce = _PageBehaviorEcommerceService.GetPageBehaviorEcommerceByProjectId(id, searchString);
 
+
+            //foreach (var item in PageBehaviorEcommerce)
+            //{
+            //    //var x = Decimal.Parse(item.EXIT_RATE);
+
+            //    //double after1 = Math.Round(before1, 1,
+            //    //    MidpointRounding.AwayFromZero);
+
+            //    //item.EXIT_RATE = Math.Round(x, 1).ToString("#") + "%";
+
+            //    var x = Decimal.Parse(item.PAGE_VALUE);
+            //    item.PAGE_VALUE = Math.Round(x, 2).ToString("#, ##");
+            //}
             var totalRecord = PageBehaviorEcommerce.Count();
 
             var totalPages = (int)Math.Ceiling((double)totalRecord / _pageSize);

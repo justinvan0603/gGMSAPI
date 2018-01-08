@@ -115,10 +115,13 @@ namespace ChatBot.Controllers
         {
 
             var Statistics = _trafficSourcesEcommerceService.CountViewTrafficSourcesEcommerce(null);
-            string cmd = $"dbo.PRJ_PROJECT_MASTER_Lst";
+          //  string cmd = $"dbo.PRJ_PROJECT_MASTER_Lst";
 
-            var result = _context.PrjProjectMaster.FromSql(cmd);
+        //    var result = _context.PrjProjectMaster.FromSql(cmd);
           //  Statistics.COUNT_WEBSITE = result.Count();
+
+
+
             return Statistics;
 
         }
