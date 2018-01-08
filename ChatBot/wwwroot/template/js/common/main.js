@@ -209,44 +209,125 @@ function Update(data) {
                 ]
             }
         }).then(displayResults3, console.error.bind(console));
+
+
+        gapi.client.request({
+            path: '/v4/reports:batchGet',
+            apiKey: 'AIzaSyDUiJxZuSngmxzC-TXOLe-BmnoB31syQOc',
+            root: 'https://analyticsreporting.googleapis.com/',
+            method: 'POST',
+            body: {
+                //apiKey:'AIzaSyDUiJxZuSngmxzC-TXOLe-BmnoB31syQOc',
+                reportRequests: [
+                    {
+                        viewId: VIEW_ID,
+
+                        dateRanges: [
+                            {
+                                startDate: '30daysAgo',
+                                endDate: 'today'
+                            }
+                        ],
+                        metrics: [
+                            {
+                                "expression": "ga:sessions"
+                            },
+                            {
+                                "expression": "ga:pageviews"
+                            },
+                            {
+                                "expression": "ga:timeOnPage"
+                            },
+                            {
+                                "expression": "ga:transactionRevenue"
+                            },
+                            {
+                                "expression": "ga:productAddsToCart"
+                            },
+                            {
+                                "expression": "ga:productCheckouts"
+                            },
+                            {
+                                "expression": "ga:productDetailViews"
+                            },
+                            {
+                                "expression": "ga:users"
+                            },
+                            {
+                                "expression": "ga:newUsers"
+                            }
+                            // expression: 'ga:sessions'
+
+
+                        ],
+                        "dimensions": [
+                            //{
+                            //    "name": "ga:pagePath"
+                            //}
+                        ]
+                    }
+                ]
+            }
+        }).then(displayResults4, console.error.bind(console));
+
+        gapi.client.request({
+            path: '/v4/reports:batchGet',
+            apiKey: 'AIzaSyDUiJxZuSngmxzC-TXOLe-BmnoB31syQOc',
+            root: 'https://analyticsreporting.googleapis.com/',
+            method: 'POST',
+            body: {
+                //apiKey:'AIzaSyDUiJxZuSngmxzC-TXOLe-BmnoB31syQOc',
+                reportRequests: [
+                    {
+                        viewId: VIEW_ID,
+
+                        dateRanges: [
+                            {
+                                startDate: '30daysAgo',
+                                endDate: 'today'
+                            }
+                        ],
+                        metrics: [
+                          
+                    
+                            {
+                                "expression": "ga:sessions"
+                            },
+                            {
+                                "expression": "ga:sessionDuration"
+                            },
+                            {
+                                "expression": "ga:pageviews"
+                            },
+                            {
+                                "expression": "ga:exits"
+                            },
+                            {
+                                "expression": "ga:transactions"
+                            },
+                            {
+                                "expression": "ga:transactionRevenue"
+                            }
+       
+
+                        ],
+                        "dimensions": [
+                            {
+                                "name": "ga:source"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }).then(displayResults5, console.error.bind(console));
     }
 
-    // Query the API and print the results to the page.
-
-	//$("#form input").each(function() {
-	//	name = this.name;
-	//	value = data[name];
-	//	$("#" + name).val(value);
-	//});
-	//if (!$("#collapse").hasClass("in")) {
-	//	$("#expand").click();
-	//}
-	//$("#add").prop("name", "PUT");
-	//$("#add span span").text("UPDATE");
-	//$(".panel-title span").text("Update a record ... ")
-	//$(".main-panel").animate({ scrollTop: 0 }, 500);
-	//$(".main-panel").perfectScrollbar('update');
 }
 
 
 function displayResults(response) {
-   // console.log("response" + response.result);
-   // response.Project = _data;
- //   var formattedJson = JSON.stringify(response.result, null, 2);
-   // document.getElementById('query-output').value = formattedJson;
-    // console.log("formattedJson" + formattedJson);
-  
-    //  var data = $("#form").serializeFormJSON();
-    //   data.id = 0;
-
- //   formattedJson.Project = _data.NOTES;
-   // console.log("_data" + _data.NOTES);
-  //  console.log("formattedJson" + response.result);
-
     var data = { 'formattedJson': response.result, 'project': _data };
     var data_new = JSON.stringify(data, null, 2);
-
-  //  console.log("data" + JSON.stringify(data, null, 2));
     $.ajax({
         url: "/api/OverviewEcommerceApi/PostOverviewEcommerce",
         method: "POST",
@@ -254,19 +335,15 @@ function displayResults(response) {
         data: data_new,
      //   data: data,
         success: function (data) {
+            console.log(data);
             if (data.Succeeded)
-                Message("Thành công", "Bạn đã cập nhật dữ liệu Tổng quan thương mại điện tử thành công!", "success");
+                Message("Thành công", "Bạn đã cập nhật dữ liệu Hiệu suất sản phẩm điện tử thành công!", "success");
             else
-                Message("Thất bại", "Đã có lỗi xảy ra!", "danger");
-          //  console.log("success");
-
-             
-            //   $('#bootstrap-table').bootstrapTable('refresh');
-            //  ResetInput();
+                Message("Thất bại", data.Message, "danger");
         },
         error: function () {
          //   console.log("error");
-            Message("Thất bại", "Đã có lỗi xảy ra khi cập nhật dữ liệu Tổng quan thương mại điện tử!", "danger");
+            Message("Thất bại", "Đã có lỗi xảy ra khi cập nhật dữ liệu Hiệu suất sản phẩm!", "danger");
         }
     });
 }
@@ -277,7 +354,7 @@ function displayResults2(response) {
     var data = { 'formattedJson': response.result, 'project': _data };
     var data_new = JSON.stringify(data, null, 2);
 
-    console.log("data" + JSON.stringify(data, null, 2));
+  //  console.log("data" + JSON.stringify(data, null, 2));
     $.ajax({
         url: "/api/ProductListPerformanceEcommerceApi/PostProductListPerformanceEcommerce",
         method: "POST",
@@ -289,7 +366,7 @@ function displayResults2(response) {
             if (data.Succeeded)
                 Message("Thành công", "Bạn đã cập nhật dữ liệu Hiệu suất doanh sách sản phẩm thành công!", "success");
             else
-                Message("Thất bại", "Đã có lỗi xảy ra!", "danger");
+                Message("Thất bại", data.Message, "danger");
            
             //   $('#bootstrap-table').bootstrapTable('refresh');
             //  ResetInput();
@@ -306,7 +383,7 @@ function displayResults3(response) {
     var data = { 'formattedJson': response.result, 'project': _data };
     var data_new = JSON.stringify(data, null, 2);
 
-      console.log("data" + JSON.stringify(data, null, 2));
+   //   console.log("data" + JSON.stringify(data, null, 2));
     $.ajax({
         url: "/api/PageBehaviorEcommerceApi/PostPageBehaviorEcommerce",
         method: "POST",
@@ -318,7 +395,7 @@ function displayResults3(response) {
             if (data.Succeeded)
                 Message("Thành công", "Bạn đã cập nhật dữ liệu Hiệu suất sản phẩm theo trang thành công!", "success");
             else
-                Message("Thất bại", "Đã có lỗi xảy ra!", "danger");
+                Message("Thất bại", data.Message, "danger");
 
             //   $('#bootstrap-table').bootstrapTable('refresh');
             //  ResetInput();
@@ -330,6 +407,58 @@ function displayResults3(response) {
     });
 }
 
+
+
+function displayResults4(response) {
+    var data = { 'formattedJson': response.result, 'project': _data };
+    var dataNew = JSON.stringify(data, null, 2);
+ //   console.log(dataNew);
+    $.ajax({
+        url: "/api/OverviewEcommerceSumApi/PostOverviewEcommerce",
+        method: "POST",
+        contentType: "application/json",
+        data: dataNew,
+        //   data: data,
+        success: function (data) {
+         //   console.log(data);
+            if (data.Succeeded)
+                Message("Thành công", "Bạn đã cập nhật dữ liệu Tổng quan thương mại điện tử thành công!", "success");
+            else
+                Message("Thất bại", data.Message, "danger");
+
+        },
+        error: function () {
+            //   console.log("error");
+            Message("Thất bại", "Đã có lỗi xảy ra khi cập nhật dữ liệu Tổng quan thương mại điện tử!", "danger");
+        }
+    });
+}
+
+
+function displayResults5(response) {
+    var data = { 'formattedJson': response.result, 'project': _data };
+    var dataNew = JSON.stringify(data, null, 2);
+    console.log("PostTrafficSourcesEcommerce"+dataNew);
+    $.ajax({
+        url: "/api/TrafficSourcesEcommerceApi/PostTrafficSourcesEcommerce",
+        method: "POST",
+        contentType: "application/json",
+        data: dataNew,
+        //   data: data,
+        success: function (data) {
+            console.log(data);
+            if (data.Succeeded)
+                Message("Thành công", "Bạn đã cập nhật dữ liệu Nguồn truy cập!", "success");
+            else
+                Message("Thất bại", data.Message, "danger");
+
+        },
+        error: function () {
+            //   console.log("error");
+            Message("Thất bại", "Đã có lỗi xảy ra khi cập nhật dữ liệu Nguồn truy cập!", "danger");
+        }
+    });
+}
 function Message(title, message, type) {
 	$.notify({
 		animate : {

@@ -124,18 +124,25 @@ namespace ChatBot
             services.AddScoped<ILoggingRepository, LoggingRepository>();
             services.AddScoped<IBotDomainRepository, BotDomainRepository>();
 
-            services.AddScoped<IOverviewEcommerceRepository, OverviewEcommerceRepository>();
+            services.AddScoped<IProductPerformaceRepository, ProductPerformaceRepository>();
             services.AddScoped<IProductListPerformanceEcommerceRepository, ProductListPerformanceEcommerceRepository>();
             services.AddScoped<IPageBehaviorEcommerceRepository, PageBehaviorEcommerceRepository>();
+            services.AddScoped<IOverviewEcommerceRepository, OverviewEcommerceRepository>();
+
+            services.AddScoped<ITrafficSourcesEcommerceRepository, TrafficSourcesEcommerceRepository>();
             //Services
 
             services.AddScoped<IMenuRoleService, MenuRoleService>();
             services.AddScoped<IApplicationGroupService, ApplicationGroupService>();
             services.AddScoped<IApplicationRoleService, ApplicationRoleService>();
 
-            services.AddScoped<IOverviewEcommerceService, OverviewEcommerceService>();
+            services.AddScoped<IProductPerformaceService, ProductPerformaceService>();
             services.AddScoped<IProductListPerformanceEcommerceService, ProductListPerformanceEcommerceService>();
             services.AddScoped<IPageBehaviorEcommerceService, PageBehaviorEcommerceService>();
+            services.AddScoped<IOverviewEcommerceService, OverviewEcommerceService>();
+            services.AddScoped<ITrafficSourcesEcommerceService, TrafficSourcesEcommerceService>();
+            
+
             //   services.AddAuthentication();
             //    services.AddCors();
             services.AddCors(options =>

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using ChatBot.Common;
 using ChatBot.Data.Infrastructure;
 using ChatBot.Infrastructure.Core;
 using ChatBot.Model.Models;
@@ -15,25 +17,24 @@ using Newtonsoft.Json;
 
 namespace ChatBot.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/TrafficSourcesEcommerceApi")]
 
-    public class PageBehaviorEcommerceApiController : Controller
+    public class TrafficSourcesEcommerceApiController : Controller
     {
         private int _page = 1;
         private int _pageSize = 10;
 
-        IPageBehaviorEcommerceService _PageBehaviorEcommerceService;
+        ITrafficSourcesEcommerceService _trafficSourcesEcommerceService;
         readonly ILoggingRepository _loggingRepository;
 
         private readonly gGMSContext _context;
-        public PageBehaviorEcommerceApiController(IPageBehaviorEcommerceService PageBehaviorEcommerceService, ILoggingRepository loggingRepository, gGMSContext context)
+        public TrafficSourcesEcommerceApiController(ITrafficSourcesEcommerceService trafficSourcesEcommerceService, ILoggingRepository loggingRepository, gGMSContext context)
         {
-            _PageBehaviorEcommerceService = PageBehaviorEcommerceService;
+            _trafficSourcesEcommerceService = trafficSourcesEcommerceService;
             _loggingRepository = loggingRepository;
             _context = context;
         }
 
-        // GET: api/<controller>
         [HttpGet]
         public async Task<IEnumerable<PrjProjectMaster>> GetAsync(string searchString)
         {
@@ -41,20 +42,10 @@ namespace ChatBot.Controllers
 
             try
             {
-                //var page = Request.Headers["Pagination"];
-
-                //if (!string.IsNullOrEmpty(page))
-                //{
-                //    string[] vals = page.ToString().Split(',');
-
-                //    int.TryParse(vals[0], out _page);
-
-                //    int.TryParse(vals[1], out _pageSize);
-                //}
 
                 cmd = $"dbo.PRJ_PROJECT_MASTER_Lst";
 
-                var result = _context.PrjProjectMaster.FromSql(cmd);
+                var result = _context.PrjProjectMaster.FromSql(cmd).Where(x => x.NOTES != null && x.NOTES != "");
 
                 if (!string.IsNullOrEmpty(searchString))
                 {
@@ -62,9 +53,13 @@ namespace ChatBot.Controllers
                                                || n.PROJECT_CODE.Contains(searchString)
                                                || n.PROJECT_NAME.Contains(searchString)
                                                || n.CONTRACT_CODE.Contains(searchString)
+                                               
                     );
                 }
-
+                foreach (var item in result)
+                {
+                    item.DOMAIN = item.SUB_DOMAIN +'.'+item.DOMAIN;
+                }
               //  var totalRecord = result.Count();
 
              //   var totalPages = (int)Math.Ceiling((double)totalRecord / _pageSize);
@@ -82,13 +77,12 @@ namespace ChatBot.Controllers
             //return new string[] { "value1", "value2" };
         }
 
-        // GET api/<controller>/5
-    //    [HttpGet("{id}")]
+
         [HttpGet]
-        [Route("GetPageBehaviorEcommerceByProjectId/{id}")]
-        public IEnumerable<PageBehaviorEcommerce> GetPageBehaviorEcommerceByProjectId(string id, string searchString)
+        [Route("GetTrafficSourcesEcommerceByProjectId/{id}")]
+        public IEnumerable<TrafficSourcesEcommerce> GetTrafficSourcesEcommerceByProjectId(string id, string searchString)
         {
-            //    var product = _PageBehaviorEcommerceService.GetAll();
+            //    var product = _TrafficSourcesEcommerceService.GetAll();
             var page = Request.Headers["Pagination"];
 
             if (!string.IsNullOrEmpty(page))
@@ -101,23 +95,37 @@ namespace ChatBot.Controllers
             }
 
 
-            var PageBehaviorEcommerce = _PageBehaviorEcommerceService.GetPageBehaviorEcommerceByProjectId(id, searchString);
+            var TrafficSourcesEcommerce = _trafficSourcesEcommerceService.GetTrafficSourcesEcommerceByProjectId(id, searchString);
 
-            var totalRecord = PageBehaviorEcommerce.Count();
+            var totalRecord = TrafficSourcesEcommerce.Count();
 
             var totalPages = (int)Math.Ceiling((double)totalRecord / _pageSize);
 
             Response.AddPagination(_page, _pageSize, totalRecord, totalPages);
 
-            return PageBehaviorEcommerce.Skip((_page - 1) * _pageSize).Take(_pageSize);
+            return TrafficSourcesEcommerce.Skip((_page - 1) * _pageSize).Take(_pageSize);
 
-            //return PageBehaviorEcommerce;
+            //return TrafficSourcesEcommerce;
         }
 
-       
 
-        [HttpPost("PostPageBehaviorEcommerce")]
-        public IActionResult PostPageBehaviorEcommerce([FromBody]Welcome welcome)
+        [HttpGet]
+        [Route("GetCountView/{id}")]
+        public List<StatisticsTrafficSourcesEcommerceViewModel> GetCountView(string id)
+        {
+
+            var Statistics = _trafficSourcesEcommerceService.CountViewTrafficSourcesEcommerce(null);
+            string cmd = $"dbo.PRJ_PROJECT_MASTER_Lst";
+
+            var result = _context.PrjProjectMaster.FromSql(cmd);
+          //  Statistics.COUNT_WEBSITE = result.Count();
+            return Statistics;
+
+        }
+
+
+        [HttpPost("PostTrafficSourcesEcommerce")]
+        public IActionResult Post([FromBody]Welcome welcome)
         {
 
             var reports = welcome.FormattedJson;
@@ -132,7 +140,13 @@ namespace ChatBot.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var version = _PageBehaviorEcommerceService.GetVersionFinal(project["PROJECT_ID"]);
+
+    
+                //ADD
+                var version = _trafficSourcesEcommerceService.GetVersionFinal(project["PROJECT_ID"]);
+
+                _trafficSourcesEcommerceService.RemoveVersionOld(project["PROJECT_ID"]);
+
 
                 var rows = reports.Reports[0].Data.Rows;
                 if (rows == null)
@@ -146,45 +160,46 @@ namespace ChatBot.Controllers
                     return _result;
 
                 }
-
                 for (int i = 0; i < rows.Length; i++)
                 {
-                    var productName = rows[i].Dimensions[0];
+                    var source = rows[i].Dimensions[0];
                     var values = rows[i].Metrics[0].Values;
 
-                 //   decimal money = Decimal.Parse(values[1]);
+                    //    decimal moeny = Decimal.Parse(values[0], System.Globalization.NumberStyles.Any);
                     //  var moeny= Double.Parse(values[0], System.Globalization.NumberStyles.Float);
 
                     //string[] moeny = values[0].ToString().Split('E');
                     //var x = Double.Parse(moeny[0])*(10^moeny)
-                    PageBehaviorEcommerce newPageBehaviorEcommerce = new PageBehaviorEcommerce
+                    TrafficSourcesEcommerce newTrafficSourcesEcommerce = new TrafficSourcesEcommerce
                     {
-                        PAGE_BEHAVIOR_ECOMMERCE_ID = 0,
-                    
-                        PAGE_PATH = productName,
-                      //  PRODUCT_NAME = productName,
-                        PAGE_VIEW = values[0],
-                        //  PAGE_VALUE = money.ToString(),
-                        PAGE_VALUE = values[1],
-                        TIME_ON_PAGE = values[2],
-                        EXIT_RATE = values[3],
+                        TRAFFIC_SOURCE_ECOMMERCE_ID = 0,
+                        SOURCE = source,
+                     //   MEDIUM = values[0],
+                        SESSIONS = values[0],
+                        SESSIONDURATION = values[1],
+                        PAGEVIEWS = values[2],
+                        EXITS = values[3],
+                        TRANSACTIONS = values[4],
+                        TRANSACTIONREVENUE = values[5],
+
+
                         CREATE_DT = DateTime.Now,
                         RECORD_STATUS = "1",
                         VERSION_INT = version + 1,
-                        DOMAIN =project["DOMAIN"],
-                 //       VERSION = (version + 1).ToString(),
+                        VERSION = (version + 1).ToString(),
 
-                        PROJECT_ID = project["PROJECT_ID"]
+                        PROJECT_ID = project["PROJECT_ID"],
+                        DOMAIN = project["DOMAIN"]
                     };
-                    _PageBehaviorEcommerceService.Add(newPageBehaviorEcommerce);
-                    _PageBehaviorEcommerceService.Save();
+                    _trafficSourcesEcommerceService.Add(newTrafficSourcesEcommerce);
+                    _trafficSourcesEcommerceService.Save();
                 }
 
-                //PageBehaviorEcommerce _newPageBehaviorEcommerce = PropertyCopy.Copy<PageBehaviorEcommerce, DomainViewModel>(PageBehaviorEcommerce);
+                //TrafficSourcesEcommerce _newTrafficSourcesEcommerce = PropertyCopy.Copy<TrafficSourcesEcommerce, DomainViewModel>(TrafficSourcesEcommerce);
 
 
-                //_newPageBehaviorEcommerce.CREATE_DT = DateTime.Now;
-                //_newPageBehaviorEcommerce.PROJECT_ID = 1;
+                //_newTrafficSourcesEcommerce.CREATE_DT = DateTime.Now;
+                //_newTrafficSourcesEcommerce.PROJECT_ID = 1;
 
 
 

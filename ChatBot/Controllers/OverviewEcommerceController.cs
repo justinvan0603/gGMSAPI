@@ -16,10 +16,10 @@ namespace ChatBot.Controllers
     //[Route("api/[controller]")]
     public class OverviewEcommerceController : Controller
     {
-        IOverviewEcommerceService _botDomainService;
+        IProductPerformaceService _botDomainService;
         readonly ILoggingRepository _loggingRepository;
 
-        public OverviewEcommerceController(IOverviewEcommerceService botDomainService, ILoggingRepository loggingRepository)
+        public OverviewEcommerceController(IProductPerformaceService botDomainService, ILoggingRepository loggingRepository)
         {
             _botDomainService = botDomainService;
             _loggingRepository = loggingRepository;

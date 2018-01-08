@@ -68,6 +68,19 @@ namespace ChatBot.Controllers
              //   var user23 = _userManager.FindByNameAsync(model.Username).Result.Claims;
 
                 var user = await _userManager.FindByNameAsync(model.Username);
+                if (user == null)
+                {
+                        _authenticationResult = new GenericTokenResult()
+                        {
+                            Succeeded = false,
+                            Message = "Tài khoản không tồn tại",
+                            access_token = null,
+                            expires_in = 0
+                        };
+                    _result = new ObjectResult(_authenticationResult);
+                    return _result;
+
+                }
                 if (user.LockoutEnabled == false)
                 {
                     _authenticationResult = new GenericTokenResult()
@@ -77,6 +90,8 @@ namespace ChatBot.Controllers
                         access_token = null,
                         expires_in = 0
                     };
+                    _result = new ObjectResult(_authenticationResult);
+                    return _result;
                 }
                 var result = await _userManager.CheckPasswordAsync(user, model.Password);
 

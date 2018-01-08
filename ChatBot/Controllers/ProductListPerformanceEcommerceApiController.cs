@@ -41,16 +41,6 @@ namespace ChatBot.Controllers
 
             try
             {
-                //var page = Request.Headers["Pagination"];
-
-                //if (!string.IsNullOrEmpty(page))
-                //{
-                //    string[] vals = page.ToString().Split(',');
-
-                //    int.TryParse(vals[0], out _page);
-
-                //    int.TryParse(vals[1], out _pageSize);
-                //}
 
                 cmd = $"dbo.PRJ_PROJECT_MASTER_Lst";
 
@@ -135,6 +125,17 @@ namespace ChatBot.Controllers
                 var version = _ProductListPerformanceEcommerceService.GetVersionFinal(project["PROJECT_ID"]);
 
                 var rows = reports.Reports[0].Data.Rows;
+                if (rows == null)
+                {
+                    _addResult = new GenericResult()
+                    {
+                        Succeeded = false,
+                        Message = "Không có dữ liệu trong 30 ngày gần nhất"
+                    };
+                    _result = new ObjectResult(_addResult);
+                    return _result;
+
+                }
                 for (int i = 0; i < rows.Length; i++)
                 {
                     var productName = rows[i].Dimensions[0];
