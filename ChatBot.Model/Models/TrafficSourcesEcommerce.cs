@@ -16,25 +16,29 @@ namespace ChatBot.Model.Models
 {
     // PrdProducts
 
-    [Table("OW_OVERVIEW_ECOMMERCE")]
-    public partial class OverviewEcommerce : ApproveAuditable
+    [Table("OW_TRAFFIC_SOURCE_ECOMMERCE")]
+    public partial class TrafficSourcesEcommerce : ApproveAuditable
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int OVERVIEW_ECOMMERCE_ID { get; set; }
+        public int TRAFFIC_SOURCE_ECOMMERCE_ID { get; set; }
+
         public string PROJECT_ID { get; set; }
-        public string PRODUCT_NAME { get; set; }
-        public string ITEM_REVENUE { get; set; }
 
-        public string PRODUCT_DETAIL_VIEWS { get; set; }
+        public string SOURCE { get; set; }
+        public string MEDIUM { get; set; }
+        public string SESSIONS { get; set; }
 
-        public string QUANTITY_ADDED_TO_CART { get; set; }
+        public string SESSIONDURATION { get; set; }
 
-        public string QUANTITY_CHECKED_OUT { get; set; }
+        public string PAGEVIEWS { get; set; }
 
-        public string DIMENSIONS { get; set; }
+        public string EXITS { get; set; }
+
+        public string TRANSACTIONS { get; set; }
+        public string TRANSACTIONREVENUE { get; set; }
+
         public string DOMAIN { get; set; }
-
         public string VERSION { get; set; }
         public int VERSION_INT { get; set; }
 
