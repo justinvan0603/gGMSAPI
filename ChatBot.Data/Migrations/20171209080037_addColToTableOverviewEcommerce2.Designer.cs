@@ -208,7 +208,7 @@ namespace ChatBot.Data.Migrations
                     b.ToTable("MenuRoles");
                 });
 
-            modelBuilder.Entity("ChatBot.Model.Models.OverviewEcommerce", b =>
+            modelBuilder.Entity("ChatBot.Model.Models.ProductPerformace", b =>
                 {
                     b.Property<int>("OVERVIEW_ECOMMERCE_ID")
                         .ValueGeneratedOnAdd();

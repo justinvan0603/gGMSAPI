@@ -20,13 +20,17 @@ namespace ChatBot.Data
         public DbSet<MenuRole> MenuRoles { set; get; }
         public DbSet<Error> Errors { set; get; }
 
-        public DbSet<OverviewEcommerce> OverviewEcommerces { set; get; }
+        public DbSet<ProductPerformace> ProductPerformaces { set; get; }
 
         public DbSet<ShoppingBehaviorEcommerce> ShoppingBehaviorEcommerces { set; get; }
 
         public DbSet<ProductListPerformanceEcommerce> ProductListPerformanceEcommerces { set; get; }
 
         public DbSet<PageBehaviorEcommerce> PageBehaviorEcommerces { set; get; }
+
+        public DbSet<OverviewEcommerce> OverviewEcommerces { set; get; }
+
+        public DbSet<TrafficSourcesEcommerce> TrafficSourcesEcommerces { set; get; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

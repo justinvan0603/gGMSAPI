@@ -220,29 +220,35 @@ namespace ChatBot.Data.Migrations
 
                     b.Property<DateTime?>("CREATE_DT");
 
-                    b.Property<string>("DIMENSIONS");
-
                     b.Property<string>("DOMAIN");
 
                     b.Property<string>("EDITOR_ID");
 
                     b.Property<DateTime?>("EDIT_DT");
 
-                    b.Property<string>("ITEM_REVENUE");
-
                     b.Property<string>("MAKER_ID");
 
-                    b.Property<string>("PRODUCT_DETAIL_VIEWS");
+                    b.Property<string>("NEWS_USERS");
 
-                    b.Property<string>("PRODUCT_NAME");
+                    b.Property<string>("PAGEVIEWS");
+
+                    b.Property<string>("PRODUCTADDSTOCART");
+
+                    b.Property<string>("PRODUCTCHECKOUTS");
+
+                    b.Property<string>("PRODUCTDETAILVIEWS");
 
                     b.Property<string>("PROJECT_ID");
 
-                    b.Property<string>("QUANTITY_ADDED_TO_CART");
-
-                    b.Property<string>("QUANTITY_CHECKED_OUT");
-
                     b.Property<string>("RECORD_STATUS");
+
+                    b.Property<string>("SESSIONS");
+
+                    b.Property<string>("TIMEONPAGE");
+
+                    b.Property<string>("TRANSACTIONREVENUE");
+
+                    b.Property<string>("USERS");
 
                     b.Property<string>("VERSION");
 
@@ -341,6 +347,52 @@ namespace ChatBot.Data.Migrations
                     b.ToTable("OW_PRODUCTLIST_PERFORMANCE_ECOMMERCE");
                 });
 
+            modelBuilder.Entity("ChatBot.Model.Models.ProductPerformace", b =>
+                {
+                    b.Property<int>("OVERVIEW_ECOMMERCE_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("APPROVE_DT");
+
+                    b.Property<string>("AUTH_STATUS");
+
+                    b.Property<string>("CHECKER_ID");
+
+                    b.Property<DateTime?>("CREATE_DT");
+
+                    b.Property<string>("DIMENSIONS");
+
+                    b.Property<string>("DOMAIN");
+
+                    b.Property<string>("EDITOR_ID");
+
+                    b.Property<DateTime?>("EDIT_DT");
+
+                    b.Property<string>("ITEM_REVENUE");
+
+                    b.Property<string>("MAKER_ID");
+
+                    b.Property<string>("PRODUCT_DETAIL_VIEWS");
+
+                    b.Property<string>("PRODUCT_NAME");
+
+                    b.Property<string>("PROJECT_ID");
+
+                    b.Property<string>("QUANTITY_ADDED_TO_CART");
+
+                    b.Property<string>("QUANTITY_CHECKED_OUT");
+
+                    b.Property<string>("RECORD_STATUS");
+
+                    b.Property<string>("VERSION");
+
+                    b.Property<int>("VERSION_INT");
+
+                    b.HasKey("OVERVIEW_ECOMMERCE_ID");
+
+                    b.ToTable("OW_PRODUCT_PERFORMACE");
+                });
+
             modelBuilder.Entity("ChatBot.Model.Models.ShoppingBehaviorEcommerce", b =>
                 {
                     b.Property<int>("SHOPPING_BEHAVIOR_ECOMMERCE_ID")
@@ -383,6 +435,56 @@ namespace ChatBot.Data.Migrations
                     b.HasKey("SHOPPING_BEHAVIOR_ECOMMERCE_ID");
 
                     b.ToTable("OW_SHOPPING_BEHAVIOR_ECOMMERCE");
+                });
+
+            modelBuilder.Entity("ChatBot.Model.Models.TrafficSourcesEcommerce", b =>
+                {
+                    b.Property<int>("TRAFFIC_SOURCE_ECOMMERCE_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("APPROVE_DT");
+
+                    b.Property<string>("AUTH_STATUS");
+
+                    b.Property<string>("CHECKER_ID");
+
+                    b.Property<DateTime?>("CREATE_DT");
+
+                    b.Property<string>("DOMAIN");
+
+                    b.Property<string>("EDITOR_ID");
+
+                    b.Property<DateTime?>("EDIT_DT");
+
+                    b.Property<string>("EXITS");
+
+                    b.Property<string>("MAKER_ID");
+
+                    b.Property<string>("MEDIUM");
+
+                    b.Property<string>("PAGEVIEWS");
+
+                    b.Property<string>("PROJECT_ID");
+
+                    b.Property<string>("RECORD_STATUS");
+
+                    b.Property<string>("SESSIONDURATION");
+
+                    b.Property<string>("SESSIONS");
+
+                    b.Property<string>("SOURCE");
+
+                    b.Property<string>("TRANSACTIONREVENUE");
+
+                    b.Property<string>("TRANSACTIONS");
+
+                    b.Property<string>("VERSION");
+
+                    b.Property<int>("VERSION_INT");
+
+                    b.HasKey("TRAFFIC_SOURCE_ECOMMERCE_ID");
+
+                    b.ToTable("OW_TRAFFIC_SOURCE_ECOMMERCE");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>

@@ -14,6 +14,7 @@ namespace ChatBot.Data.Respositories
 
         //}
         int GetVersionFinal(string projectId);
+        void RemoveVersionOld(string projectId);
     }
 
     public class OverviewEcommerceRepository : RepositoryBase<OverviewEcommerce>, IOverviewEcommerceRepository
@@ -32,6 +33,16 @@ namespace ChatBot.Data.Respositories
             if (version == null)
                 return 0;
                 return version.VERSION_INT;
+        }
+
+        public void RemoveVersionOld(string projectId)
+        {
+            //  var result = DbContext.OverviewEcommerces.SelectOrderByDescending(x => x.VERSION_INT);
+            DbContext.OverviewEcommerces.Where(x => x.RECORD_STATUS == "1" &&x.PROJECT_ID==projectId).ToList().ForEach(x =>
+            {
+                x.RECORD_STATUS = "0";
+            });
+            DbContext.SaveChanges();
         }
         // public int GetVersionFinal();
         //{
