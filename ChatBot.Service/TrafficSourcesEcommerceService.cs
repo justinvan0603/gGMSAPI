@@ -94,11 +94,11 @@ namespace ChatBot.Service
                 // Nested foreach is required to access group items.
                 foreach (var item in itemGroup)
                 {
-                   
-                    statisticsViewModel.SOURCE = item.SOURCE;
+              
                     statisticsViewModel.PAGEVIEWS += Double.Parse(item.PAGEVIEWS);
+                    statisticsViewModel.SOURCE = item.SOURCE;
                     //item.QUANTITY_ADDED_TO_CART += Double.Parse(item.QUANTITY_ADDED_TO_CART);
-                    
+
                     //    Console.WriteLine("\t{student.LastName}, {student.FirstName}");
                 }
                 countPageviews += statisticsViewModel.PAGEVIEWS;
@@ -107,6 +107,30 @@ namespace ChatBot.Service
             
             foreach (var item in statisticsViewModelList)
             {
+                if (item.SOURCE != null)
+                {
+
+                    if (item.SOURCE.StartsWith("(direct)"))
+                    {
+                        item.SOURCE = item.SOURCE + " (Trực tiếp vào website)";
+                    }
+
+                    else if ( item.SOURCE.Contains("l.facebook.com"))
+                    {
+                        item.SOURCE = item.SOURCE + " (Truy cập qua kênh Facebook)";
+                    }
+                    else if (item.SOURCE.Contains("m.facebook.com"))
+                    {
+                        item.SOURCE = item.SOURCE + " (Truy cập qua kênh Facebook - Trên di động)";
+                    }
+                    else
+                    {
+
+                        item.SOURCE = item.SOURCE;
+                    }
+                }
+
+                
                 item.PERCENT = Math.Round(item.PAGEVIEWS * 100/countPageviews,2);
                 item.SUM_PAGEVIEW = countPageviews.ToString("#");
             }
