@@ -328,6 +328,7 @@ function Update(data) {
 function displayResults(response) {
     var data = { 'formattedJson': response.result, 'project': _data };
     var data_new = JSON.stringify(data, null, 2);
+    console.log("product", data_new);
     $.ajax({
         url: "/api/OverviewEcommerceApi/PostOverviewEcommerce",
         method: "POST",

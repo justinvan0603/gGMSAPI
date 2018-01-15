@@ -57,7 +57,7 @@ namespace ChatBot.Controllers
 
                 cmd = $"dbo.PRJ_PROJECT_MASTER_Lst";
 
-                var result = _context.PrjProjectMaster.FromSql(cmd).Where(x => x.NOTES != null && x.NOTES != "");
+                var result = _context.PrjProjectMaster.FromSql(cmd).Where(x => x.VIEW_ID != null && x.VIEW_ID != "");
 
                 if (!string.IsNullOrEmpty(searchString))
                 {
