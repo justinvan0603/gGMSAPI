@@ -171,6 +171,7 @@ namespace ChatBot.Controllers
                     botScenarioViewModel.BotQuestions[i].QUESTION_ID = 0;
                     botScenarioViewModel.BotQuestions[i].SCENARIO_ID = botScenarioViewModel.BotScenario.SCENARIO_ID;
                     botScenarioViewModel.BotQuestions[i].LEVEL = 1;
+                    botScenarioViewModel.BotQuestions[i].RECORD_STATUS = 1;
                     this._context.BotQuestions.Add(botScenarioViewModel.BotQuestions[i]);
                     this._context.SaveChanges();
                     //if (botScenarioViewModel.BotQuestions[i].QUESTION_TYPE != 1)
@@ -178,6 +179,8 @@ namespace ChatBot.Controllers
                         botScenarioViewModel.BotAnswers[i].ANSWER_ID = 0;
                         botScenarioViewModel.BotAnswers[i].QUESTION_ID = botScenarioViewModel.BotQuestions[i].QUESTION_ID;
                         botScenarioViewModel.BotAnswers[i].LEVEL = 1;
+                        botScenarioViewModel.BotAnswers[i].IS_END = true;
+                        botScenarioViewModel.BotAnswers[i].RECORD_STATUS = 1;
                         this._context.BotAnswers.Add(botScenarioViewModel.BotAnswers[i]);
                         this._context.SaveChanges();
                     //}
